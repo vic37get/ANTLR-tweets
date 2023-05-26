@@ -1,16 +1,24 @@
-# This is a sample Python script.
+from antlr4 import *
+from gen.ttLexer import ttLexer
+from gen.ttParser import ttParser
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def main():
+    dados = FileStream("inputs/input1.txt", encoding="utf-8")
+    #dados = InputStream("hello Raimundo, Santos, Moura.")
+    lexer = ttLexer(dados)
+    for tok in lexer.getAllTokens():
+        print(tok.text, tok.type)
+    lexer.reset()
+    stream = CommonTokenStream(lexer)
 
+    for token in stream.tokens:
+        token_type = token.type
+        token_name = lexer.symbolicNames[token_type]
+        print("Token:", token.text, ", Classe:", token_name)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    parser = ttParser(stream)
+    tree = parser.prog()
+    print(tree.toStringTree())
 
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
