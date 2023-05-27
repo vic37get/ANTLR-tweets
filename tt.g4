@@ -67,7 +67,7 @@ palavra: (PALAVRA);
 
 
 //SITE: (('http'[s]?'://')|'w'{3};
-LETRA: [A-Za-zÁáÉéÍíÓóÚúÀàÈèÌìÒòÙùÂâÊêÎîÔôÛûÃãẼẽĨĩÕõŨũÇç];
+LETRA: [A-Za-zÇç];
 MENCOES: '@'[a-zA-Z0-9_]+;
 HASHTAGS: '#'[a-zA-Z0-9]+;
 WS: [ \t\f\r\n] -> skip;
