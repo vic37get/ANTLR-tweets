@@ -1,0 +1,15 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+body{
+    background-color: cadetblue;
+}
+
+.box-classe{
+    background-color: rgb(255, 255, 255);
+    margin: 10px;
+    padding: 10px;
+}
