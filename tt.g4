@@ -43,12 +43,12 @@ monetario: (VALOR_MONETARIO | MOEDA);
     CIFRAO: '[rR]$'|'$';
     MOEDA: 'dolar'|'dol';
 
-numeros: (PORCENTAGEM | NUMERO | FRACAO | QUANTIDADE);
+numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO);
     FRACAO: DIGITO+[/,.]DIGITO+;
     PORCENTAGEM: [-+]?FRACAO'%'|[-+]?DIGITO+'%';
-    QUANTIDADE: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
+    quantidade: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
     NUMERO: DIGITO+;
-    SIMBOLO_QUANTIDADE: '[bm]ilh[aã]o'|'[bm]ilh[oõ]es'|'mil'|'k'|'m'|'bi';
+    SIMBOLO_QUANTIDADE: '[bm]ilhao'|'[bm]ilhoes'|'mil'|'k'|'m'|'bi';
     DIGITO: [0-9];
 
 char: (PONTUACAO | parenteses | OUTROS_CHARS | ASPAS | EMOJI);
