@@ -29,14 +29,13 @@ tempo: (TURNO | horas | DIA_TEMPO | MEDIDA_TEMPO | MES);
          [Nn]'ov''embro'? | 'NOVEMBRO' |
          [Dd]'ezembro' | 'DEZEMBRO';
 
-tipo_investimento: (RENDA_FIXA | RENDA_VARIAVEL | CRIPTO);
-    RENDA_FIXA: [Pp]'oupan'[cç]'a' | [Tt]'esouro' WS [Dd]'ireto' | ([Tt]'esouro' WS)? ('SELIC' | [Ss]'elic') | ([Tt]'esouro' WS)? ('IPCA' | [Ii]'pca') | 'CDB' | 'LCI' | 'LCA' | 'CRI' | 'CRA' | 'LC' | [Dd]'eb'[eê]'ntures' | 'LF';
-    RENDA_VARIAVEL: [Aa][cç]([oõ]'es' | [aã]'o') | 'BDR''s'? | [Ff]'undo''s'? WS 'de' WS 'investimento''s'? | [Ff]'undo''s'? WS 'imobili'[aá]'rio''s'? | 'FII''s'? | 'ETF''s'?;
-    CRIPTO: [Cc]'ripto''s'?;
-
 horas: (HORA_FORMATADA | HORA_EXTENSO);
     HORA_EXTENSO:WS DIGITO DIGITO WS'da'WS TURNO;
     HORA_FORMATADA: DIGITO DIGITO[hH];
+
+tipo_investimento: (RENDA_FIXA | RENDA_VARIAVEL);
+    RENDA_FIXA: [Pp]'oupan'[cç]'a' | [Tt]'esouro' WS [Dd]'ireto' | ([Tt]'esouro' WS)? ('SELIC' | [Ss]'elic') | ([Tt]'esouro' WS)? ('IPCA' | [Ii]'pca') | 'CDB' | 'LCI' | 'LCA' | 'CRI' | 'CRA' | 'LC' | [Dd]'eb'[eê]'ntures' | 'LF';
+    RENDA_VARIAVEL: [Aa][cç]([oõ]'es' | [aã]'o') | 'BDR''s'? | [Ff]'undo''s'? WS 'de' WS 'investimento''s'? | [Ff]'undo''s'? WS 'imobili'[aá]'rio''s'? | 'FII''s'? | 'ETF''s'? | [Cc]'ripto''s'? | [Bb]'itcoin';
 
 ativo: (ACAO | FII_ETF);
     FII_ETF: LETRA LETRA LETRA LETRA'11';
@@ -72,7 +71,7 @@ palavra: (PALAVRA);
 
 
 //SITE: (('http'[s]?'://')|'w'{3};
-LETRA: [A-Za-zÇç];
+LETRA: [A-Za-z];
 MENCOES: '@'[a-zA-Z0-9_]+;
 HASHTAGS: '#'[a-zA-Z0-9]+;
 WS: [ \t\f\r\n] -> skip;
