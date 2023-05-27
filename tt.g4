@@ -1,6 +1,6 @@
 grammar tt;
 
-prog: (tempo | ativo | monetario | palavra | HASHTAGS| numeros | char | MENCOES | datas)+;
+prog: (tempo | ativo | monetario | palavra | HASHTAGS| numeros | tipo_investimento | char | MENCOES | datas)+;
 
 datas: (DATA_COM_BARRA | DIA_SEMANA);
     DATA_COM_BARRA: (DIGITO DIGITO'/'DIGITO DIGITO'/'DIGITO DIGITO DIGITO DIGITO);
@@ -29,6 +29,11 @@ tempo: (TURNO | horas | DIA_TEMPO | MEDIDA_TEMPO | MES);
          [Nn]'ov''embro'? | 'NOVEMBRO' |
          [Dd]'ezembro' | 'DEZEMBRO';
 
+tipo_investimento: (RENDA_FIXA | RENDA_VARIAVEL | CRIPTO);
+    RENDA_FIXA: [Pp]'oupan'[cç]'a' | [Tt]'esouro' WS [Dd]'ireto' | ([Tt]'esouro' WS)? ('SELIC' | [Ss]'elic') | ([Tt]'esouro' WS)? ('IPCA' | [Ii]'pca') | 'CDB' | 'LCI' | 'LCA' | 'CRI' | 'CRA' | 'LC' | [Dd]'eb'[eê]'ntures' | 'LF';
+    RENDA_VARIAVEL: [Aa][cç]([oõ]'es' | [aã]'o') | 'BDR''s'? | [Ff]'undo''s'? WS 'de' WS 'investimento''s'? | [Ff]'undo''s'? WS 'imobili'[aá]'rio''s'? | 'FII''s'? | 'ETF''s'?;
+    CRIPTO: [Cc]'ripto''s'?;
+
 horas: (HORA_FORMATADA | HORA_EXTENSO);
     HORA_EXTENSO:WS DIGITO DIGITO WS'da'WS TURNO;
     HORA_FORMATADA: DIGITO DIGITO[hH];
@@ -37,11 +42,11 @@ ativo: (ACAO | FII_ETF);
     FII_ETF: LETRA LETRA LETRA LETRA'11';
     ACAO: LETRA LETRA LETRA LETRA[3-9];
 
-monetario: (VALOR_MONETARIO | MOEDA);
-    VALOR_MONETARIO: (CIFRAO FRACAO) | (CIFRAO NUMERO) ;
+monetario: (valor_monetario | MOEDA);
+    valor_monetario: (CIFRAO FRACAO) | (CIFRAO NUMERO) ;
     VALOR: (([0-9]{1,3}[,][0-9]{2})|((([0-9]){1,3}[.])+));
-    CIFRAO: '[rR]$'|'$';
-    MOEDA: 'dolar'|'dol';
+    CIFRAO: [Rr]'$'|'$';
+    MOEDA: 'd'[oó]'lar'|'dol';
 
 numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO);
     FRACAO: DIGITO+[/,.]DIGITO+;
