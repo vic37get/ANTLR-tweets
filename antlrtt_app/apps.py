@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AntlrtwitterConfig(AppConfig):
+class PlantacaoAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'antlrtwitter'
+    name = 'antlrtt_app'

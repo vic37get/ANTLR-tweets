@@ -1,13 +1,15 @@
+from django.contrib import messages
 from django.http import HttpResponse
 from django.template import loader
 from antlr4 import *
 from gen.ttLexer import ttLexer
-from gen.ttParser import ttParser
 from unidecode import unidecode
-# Create your views here.
+
+
 def home(request):
     with open("inputs/input_financeiro1.txt", 'r', encoding='utf-8') as f:
         dados = f.read()
+
     dados = unidecode(dados)
     dados = InputStream(dados)
     lexer = ttLexer(dados)
@@ -23,11 +25,11 @@ def home(request):
 
     for k, v in dict_tokens.items():
         dict_tokens[k] = list(set(v))
-
     lexer.reset()
+
     context = {
         'dict_tokens': dict_tokens,
+        'tweet': dados,
     }
-    template = loader.get_template('antlrtwitter/home.html')
+    template = loader.get_template('antlrtt_app/home.html')
     return HttpResponse(template.render(context, request))
-

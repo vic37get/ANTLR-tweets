@@ -1,0 +1,85 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+        <!-- Última versão CSS compilada e minificada do Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href={%static "antlrtt_app/assets/icone.png" %} />
+
+        <!-- JavaScript -->
+        <script src={%static "antlrtt_app/js/scripts.js"%} ></script>
+        
+        <!-- CSS -->
+        <link href={%static "antlrtt_app/css/home.css" %} rel="stylesheet" referrerpolicy="origin">
+        
+        <!-- Toggle button -->
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+        <!-- Icones fontaweasome-->
+        <script src="https://kit.fontawesome.com/4169326a4c.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+
+        <title>ANTLR Tweets</title>
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    </head>
+
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header__toggle">
+                <i class='bx bx-menu' id="header-toggle"></i>
+            </div>
+        </header>
+
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="{% url 'antlrtt_app:index' %}" class="nav__logo">
+                        <i class="fa-solid fa-money-bill-trend-up nav__logo-icon"></i>
+                        <span class="nav__logo-name">ANTLR Tweets</span>
+                    </a>
+
+                    <div class="nav__list">
+                        <a href="" class="nav__link">
+                        <i class='fa-solid fa-file-arrow-up nav__icon' ></i>
+                            <span class="nav__name">Inserir arquivo</span>
+                        </a>
+
+                        <a href="" class="nav__link">
+                            <i class='fa-solid fa-pen nav__icon' ></i>
+                            <span class="nav__name">Escrever tweet</span>
+                        </a>
+
+                        <a href="" class="nav__link">
+                            <i class='fa-solid fa-floppy-disk nav__icon' ></i>
+                            <span class="nav__name">Salvar resultado</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+            {% block content %}
+    
+            {% endblock content %}
+            <script src={%static "antlrtt_app/js/main.js"%} ></script>
+    </body>
+
+</html>

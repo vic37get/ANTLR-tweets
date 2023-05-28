@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="quadroTweet m-5">
+    <div class="box_dadosTituloTweet">
+        <i class="fa-brands fa-twitter"></i> Tweet
+    </div>
+    <div class="usuarioTweet">
+        <i class="fa-solid fa-circle-user"></i> <span style="font-size: 20px;">Usuario @Usuario</span>
+    </div>
+    <div class="box_dadosConteudoTweet">
+        <p class="dadosTweet">
+            <span id='status'>{{tweet}}</span>
+        </p>
+    </div>
+</div>
+
+<main class="main-content-list row-cols-1 justify-content-center m-5">
+    {% for classe, tokens in dict_tokens.items %}
+        <div class="col quadro">
+            <div class="box_dadosTitulo">
+                <i class="fa-solid fa-layer-group"></i> {{classe}}
+            </div>
+            <div class="box_dadosConteudo">
+                <p>
+                    <span id='status'>
+                        {% for token in tokens %}
+                            {{token}}
+                        {% endfor %}
+                    </span>
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+</main>
+{% endblock content %}

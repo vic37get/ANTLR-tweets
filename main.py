@@ -18,8 +18,9 @@ def main():
         else:
             dict_tokens[lexer.symbolicNames[token.type]] = [token.text]
 
+    for k, v in dict_tokens.items():
+        dict_tokens[k] = list(set(v))
     lexer.reset()
-    print(dict_tokens)
 
 if __name__ == '__main__':
     main()
