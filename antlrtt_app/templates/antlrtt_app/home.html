@@ -1,35 +1,125 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="quadroTweet m-5">
-    <div class="box_dadosTituloTweet">
-        <i class="fa-brands fa-twitter"></i> Tweet
-    </div>
-    <div class="usuarioTweet">
-        <i class="fa-solid fa-circle-user"></i> <span style="font-size: 20px;">Usuario @Usuario</span>
-    </div>
-    <div class="box_dadosConteudoTweet">
-        <p class="dadosTweet">
-            <span id='status'>{{tweet}}</span>
-        </p>
-    </div>
-</div>
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<main class="main-content-list row-cols-1 justify-content-center m-5">
-    {% for classe, tokens in dict_tokens.items %}
-        <div class="col quadro">
-            <div class="box_dadosTitulo">
-                <i class="fa-solid fa-layer-group"></i> {{classe}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+        <!-- Última versão CSS compilada e minificada do Bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+            
+        <!-- Bootstrap icons-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href={%static "antlrtt_app/assets/icone.png" %} />
+
+        <!-- JavaScript -->
+        <script src={%static "antlrtt_app/js/scripts.js"%} ></script>
+        
+        <!-- CSS -->
+        <link href={%static "antlrtt_app/css/home.css" %} rel="stylesheet" referrerpolicy="origin">
+
+        <!-- Jquery Links -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
+        <!-- Toggle button -->
+        <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+
+        <!-- Icones fontaweasome-->
+        <script src="https://kit.fontawesome.com/4169326a4c.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+
+        <title>ANTLR Tweets</title>
+
+        <!-- ===== BOX ICONS ===== -->
+        <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+
+    </head>
+
+    <body id="body-pd">
+        <header class="header" id="header">
+            <div class="header__toggle">
+                <i class='bx bx-menu' id="header-toggle"></i>
             </div>
-            <div class="box_dadosConteudo">
-                <p>
-                    <span id='status'>
-                        {% for token in tokens %}
-                            {{token}}
-                        {% endfor %}
-                    </span>
+        </header>
+
+        <div class="l-navbar" id="nav-bar">
+            <nav class="nav">
+                <div>
+                    <a href="{% url 'antlrtt_app:index' %}" class="nav__logo">
+                        <i class="fa-solid fa-money-bill-trend-up nav__logo-icon"></i>
+                        <span class="nav__logo-name">ANTLR Tweets</span>
+                    </a>
+
+                    <div class="nav__list">
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="file-input">
+                                <input type="file" id="my-file" class="input-file" name='file'>
+                                <label for="my-file" class="file-label nav__name nav__link"><i class='fa-solid fa-file-arrow-up nav__icon' ></i>Upload de Arquivo</label>
+                            </div>
+                        </form>
+                        
+                        <a href="{% url 'antlrtt_app:download_json' %}" class="nav__link">
+                            <i class='fa-solid fa-download nav__icon'></i>
+                            <span class="nav__name">Salvar dados</span>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <div class="quadroTweet m-5">
+            <div class="box_dadosTituloTweet">
+                <i class="fa-brands fa-twitter"></i> Tweet
+            </div>
+            <div class="usuarioTweet">
+                <i class="fa-solid fa-circle-user"></i> <span style="font-size: 20px;">Usuario @Usuario</span>
+            </div>
+            <div class="box_dadosConteudoTweet">
+                <p class="dadosTweet">
+                    <span id='status'>{{tweet}}</span>
                 </p>
             </div>
         </div>
-    {% endfor %}
-</main>
-{% endblock content %}
+        
+        <main class="main-content-list row-cols-1 justify-content-center m-5">
+            {% for classe, tokens in dict_tokens.items %}
+                <div class="col quadro">
+                    <div class="box_dadosTitulo">
+                        <i class="fa-solid fa-layer-group"></i> <span>{{classe}}</span>
+                    </div>
+                    <div class="box_dadosConteudo">
+                        <p>
+                            <span id='status'>
+                                {{tokens}}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </main>
+            <script src={%static "antlrtt_app/js/main.js"%} ></script>
+    </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Adiciona um evento de mudança ao campo de entrada de arquivo
+            document.getElementById('my-file').addEventListener('change', function() {
+                // Submete automaticamente o formulário quando um arquivo é selecionado
+                this.closest('form').submit();
+            });
+        });
+    </script>
+
+</html>

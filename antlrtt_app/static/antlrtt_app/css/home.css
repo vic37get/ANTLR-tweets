@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
 :root{
-    --primeira_cor: rgb(66, 180, 255);
-    --cor_fundo: rgb(29, 155, 240);
+    --primeira_cor: rgb(29, 155, 240);
+    --cor_fundo: rgb(66, 180, 255);
     --segunda_cor: #dbf8ff;
     --fonte-titulos: 'Roboto', sans-serif;
     --header-height: 2.5rem;
@@ -35,10 +35,28 @@ body{
   height: fit-content !important;
 }
 
+.file-input {
+  position: relative;
+  display: inline-block;
+}
+
+.input-file {
+  position: absolute;
+  left: -9999px;
+}
+
+.file-label {
+  display: inline-block;
+  color: #fff;
+  cursor: pointer;
+}
+
 .box_dadosTitulo{
   font-family: var(--fonte-titulos);
   color: var(--primeira_cor);
   font-size: 20px;
+  padding-left: 40px;
+  text-align: left;
   margin-top: 30px;
 }
 
@@ -53,7 +71,7 @@ body{
 .box_dadosConteudo{
   font-family: var(--fonte-titulos);
   font-size: 20px;
-  margin-top: 40px;
+  margin-top: 20px;
   padding: 20px;
   text-align: justify;
 }
@@ -75,8 +93,7 @@ body{
 .quadro{
   text-align: center;
   background-color: var(--card-color);
-  border-radius: 10px;
-  border: 1px solid rgb(185, 185, 185);
+  border-radius: 5px;
   height: auto;
   transition: all 150ms ease-in-out; 
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
@@ -85,6 +102,7 @@ body{
 .quadroTweet{
   text-align: center;
   border-radius: 5px;
+  height: auto;
   background-color: var(--menu-color);
   transition: all 150ms ease-in-out; 
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;

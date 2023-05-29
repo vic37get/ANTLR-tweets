@@ -1,5 +1,13 @@
-Vc sabia que “investindo” no indice ibovespa, vc esta comprando: Goll4, cogn3, petz3, viia3, ntco3, irbr3, hapv3, cash3…
+Exercício de Opções movimenta R$17,1 bilhões na B3
 
-Usar ibov como benchmark é enganar o cliente. A proxima vez que for investir em algum fundo ativo voce tem que usar idiv como parametro nao ibov. 
+TOP 5
 
-IDIV esta…
+VALE3 - R$83,08: R$521.110.992,00 em PUT
+
+PETR4 - R$22,43: R$503.762.099,00 em CALL
+
+PETR4 - R$24,93: R$323.583.921,00 em CALL
+
+BBAS3 - R$42,80: R$277.866.160,00 em CALL
+
+BOVA11 - R$107,00: R$266.565.997,00 em CALL
