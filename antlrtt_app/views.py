@@ -28,7 +28,7 @@ def home(request):
         print(dict_tokens)
 
         for k, v in dict_tokens.items():
-            dict_tokens[k] = str((set(v))).replace('{', '').replace('}', '').replace("'", '')
+            dict_tokens[k] = [str((set(v))).replace('{', '').replace('}', '').replace("'", ''), len((set(v)))]
         lexer.reset()
         
         with open('db/entrada.json', 'w') as json_file:

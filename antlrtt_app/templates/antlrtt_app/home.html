@@ -84,12 +84,17 @@
                 <i class="fa-brands fa-twitter"></i> Tweet
             </div>
             <div class="usuarioTweet">
-                <i class="fa-solid fa-circle-user"></i> <span style="font-size: 20px;">Usuario @Usuario</span>
+                <i class="fa-solid fa-circle-user"></i> <span style="font-size: 20px;">Usuario <span style="color: rgb(150, 150, 150)">@Usuario</span></span>
             </div>
             <div class="box_dadosConteudoTweet">
                 <p class="dadosTweet">
                     <span id='status'>{{tweet}}</span>
                 </p>
+                <div class="box_dadosConteudoTweet-barraInferior">
+                    <button class="tweet-button">
+                        <i class="fab fa-twitter"></i> Escrever Tweet
+                    </button>
+                </div>
             </div>
         </div>
         
@@ -102,9 +107,12 @@
                     <div class="box_dadosConteudo">
                         <p>
                             <span id='status'>
-                                {{tokens}}
+                                {{tokens.0}}
                             </span>
                         </p>
+                        <div class='box_dadosConteudo-barraInferior'>
+                            <i class="fa-solid fa-chart-simple"></i> {{tokens.1}}
+                        </div>
                     </div>
                 </div>
             {% endfor %}

@@ -9,8 +9,9 @@
     --nav-width: 68px;
     --white-color: #fafcff;
     --menu-color: rgb(255, 255, 255);
-    --card-color: rgb(252, 252, 252);
+    --card-color: rgb(253, 253, 253);
     --z-fixed: 1;
+    --cor_borda: #e6ecf0;
 }
 
 * {
@@ -54,7 +55,7 @@ body{
 .box_dadosTitulo{
   font-family: var(--fonte-titulos);
   color: var(--primeira_cor);
-  font-size: 20px;
+  font-size: 18px;
   padding-left: 40px;
   text-align: left;
   margin-top: 30px;
@@ -65,38 +66,71 @@ body{
   color: var(--primeira_cor);
   font-size: 20px;
   text-align: left;
-  padding: 20px;
+  padding: 20px 20px 20px 40px;
 }
 
 .box_dadosConteudo{
   font-family: var(--fonte-titulos);
-  font-size: 20px;
-  margin-top: 20px;
-  padding: 20px;
+  padding: 20px 20px 0px 40px;
   text-align: justify;
+  font-family: "Segoe UI", sans-serif; /* Fonte do Twitter */
+  font-size: 16px; /* Tamanho da fonte */
+  color: #14171a; /* Cor do texto */
+}
+
+.box_dadosConteudo-barraInferior{
+  padding: 10px 0px 10px 0px;
+  font-size: 18px;
+  color: rgb(65, 65, 65);
 }
 
 .box_dadosConteudoTweet{
   font-family: var(--fonte-titulos);
-  font-size: 17px;
-  padding: 30px;
+  padding: 20px 20px 0px 50px;
   text-align: justify;
+  font-family: "Segoe UI", sans-serif; /* Fonte do Twitter */
+  font-size: 16px; /* Tamanho da fonte */
+  color: #14171a; /* Cor do texto */
+}
+
+.box_dadosConteudoTweet-barraInferior{
+  padding: 20px 0px 20px 0px;
+}
+
+.tweet-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.tweet-button i {
+  margin-right: 5px;
 }
 
 .usuarioTweet{
   font-size: 40px;
-  color: rgb(98, 98, 98);
+  color: rgb(65, 65, 65);
   text-align: left;
   padding-left: 50px;
 }
 
 .quadro{
+  border: 1px solid var(--cor_borda);
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
   text-align: center;
   background-color: var(--card-color);
-  border-radius: 5px;
   height: auto;
   transition: all 150ms ease-in-out; 
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .quadroTweet{
@@ -106,26 +140,26 @@ body{
   background-color: var(--menu-color);
   transition: all 150ms ease-in-out; 
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  border: 1px solid var(--cor_borda);
 }
 
 .quadro:hover{
-  transform: scale(1.02);
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transform: scale(1.005);
   z-index: 5;
 }
 
 .main-content-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 4rem;
+  border: 1px solid var(--cor_borda);
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  align-items: center !important;
+  grid-template-rows: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 10px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
 }
-
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 90px;
-    height: 34px;
-  }
 
 /*SIDEBAR */
 
@@ -150,6 +184,7 @@ a{
   background-color: var(--menu-color);
   z-index: var(--z-fixed);
   transition: .5s;
+  border-bottom: 1px solid var(--cor_borda);
 }
 
 .header__toggle{
@@ -178,6 +213,7 @@ a{
   width: var(--nav-width);
   height: 100vh;
   background-color: var(--primeira_cor);
+  border-right: 1px solid rgb(0, 153, 255);
   padding: .5rem 1rem 0 0;
   transition: .5s;
   z-index: var(--z-fixed);

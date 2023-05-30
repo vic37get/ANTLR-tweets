@@ -2,3 +2,4 @@ django==4.2.1
 antlr4-python3-runtime==4.13.0
 whitenoise>=6.0
 unidecode
+json
