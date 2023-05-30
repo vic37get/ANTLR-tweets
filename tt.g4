@@ -1,6 +1,6 @@
 grammar tt;
 
-prog: (tempo | ativo | monetario | palavra | HASHTAGS| numeros | tipo_investimento | char | MENCOES | datas)+;
+prog: (tempo | tipo_investimento | ativo | monetario | palavra | HASHTAGS| numeros | char | MENCOES | datas)+;
 
 datas: (DATA_COM_BARRA | DIA_SEMANA);
     DATA_COM_BARRA: (DIGITO DIGITO'/'DIGITO DIGITO'/'DIGITO DIGITO DIGITO DIGITO);
@@ -15,7 +15,7 @@ datas: (DATA_COM_BARRA | DIA_SEMANA);
 tempo: (TURNO | horas | DIA_TEMPO | MEDIDA_TEMPO | MES);
     TURNO: 'manhã' | 'tarde' | 'noite' | 'madrugada';
     DIA_TEMPO: 'ontem' | 'hoje' | 'amanh'[aã] | 'anteontem';
-    MEDIDA_TEMPO: 'min' | 'hora' | 'h' | 'ano'[s]? | 'mes''es'?;
+    MEDIDA_TEMPO: 'min' | 'hora' | 'h' | 'ano'[s]? | 'mês'| 'meses';
     MES: [Jj]'an''eiro'? | 'JANEIRO' |
          [Ff]'ev''ereiro'? | 'FEVEIRO' |
          [Mm]'arço' | 'MARÇO' |
@@ -35,22 +35,23 @@ horas: (HORA_FORMATADA | HORA_EXTENSO);
 
 tipo_investimento: (RENDA_FIXA | RENDA_VARIAVEL);
     RENDA_FIXA: [Pp]'oupan'[cç]'a' | [Tt]'esouro' WS [Dd]'ireto' | ([Tt]'esouro' WS)? ('SELIC' | [Ss]'elic') | ([Tt]'esouro' WS)? ('IPCA' | [Ii]'pca') | 'CDB' | 'LCI' | 'LCA' | 'CRI' | 'CRA' | 'LC' | [Dd]'eb'[eê]'ntures' | 'LF';
-    RENDA_VARIAVEL: [Aa][cç]([oõ]'es' | [aã]'o') | 'BDR''s'? | [Ff]'undo''s'? WS 'de' WS 'investimento''s'? | [Ff]'undo''s'? WS 'imobili'[aá]'rio''s'? | ('FII' | 'fii' )'s'? | 'ETF''s'? | [Ff]'iagro' | [Cc]'ripto''s'? | [Bb]'itcoin';
+    RENDA_VARIAVEL: [Aa][cç]([oõ]'es' | [aã]'o') | 'BDR''s'? | [Ff]'undo''s'? WS 'de' WS 'investimento''s'? | [Ff]'undo''s'? WS 'imobili'[aá]'rio''s'? | ('FII' | 'fii' )'s'? | 'ETF''s'? | [Ff]'iagro' | [Cc]'ripto''s'? | [Bb]'itcoin'
+    | 'Fi-infra' | 'fip-ie';
 
-ativo: (ACAO | FII_ETF);
-    FII_ETF: LETRA LETRA LETRA LETRA'11';
+ativo: (ACAO | FII);
+    FII: LETRA LETRA LETRA LETRA'11';
     ACAO: LETRA LETRA LETRA LETRA[3-9];
 
-monetario: (valor_monetario | MOEDA);
+monetario: (VALOR_MONETARIO | MOEDA);
     //valor_monetario: (SIMBOLO_MOEDA FRACAO SIMBOLO_QUANTIDADE?) | (SIMBOLO_MOEDA NUMERO SIMBOLO_QUANTIDADE?) ;
-    valor_monetario: (SIMBOLO_MOEDA VALOR SIMBOLO_QUANTIDADE?) | (VALOR SIMBOLO_QUANTIDADE MOEDA) ;
+    VALOR_MONETARIO: (SIMBOLO_MOEDA VALOR SIMBOLO_QUANTIDADE) | (VALOR SIMBOLO_QUANTIDADE MOEDA) ;
     //VALOR: (([0-9]{1,3}[,][0-9]{2})|((([0-9]){1,3}[.])+));
     VALOR: (([1-9]DIGITO{0,2}('.'DIGITO{3})*)|(([1-9]'.'DIGITO*)?DIGITO))(','NUMERO)? | NUMERO;
     SIMBOLO_MOEDA: [Rr]'$'|'$';
     MOEDA: 'real' | 'reais' | 'd'[oó]'lar''es'?|'dol';
 
     numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO);
-    FRACAO: DIGITO+[/,]DIGITO+;
+    FRACAO: DIGITO+'.'|','DIGITO+;
     PORCENTAGEM: [-+]?FRACAO'%'|[-+]?DIGITO+'%';
     quantidade: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
     NUMERO: DIGITO+;
@@ -73,7 +74,7 @@ palavra: (PALAVRA);
 
 
 //SITE: (('http'[s]?'://')|'w'{3};
-LETRA: [A-Za-z];
+LETRA: [A-Za-zÁáÂâÃãÀàÉéÊêÍíÓóÔôÕõÚúÜüÇç];
 MENCOES: '@'[a-zA-Z0-9_]+;
 HASHTAGS: '#'[a-zA-Z0-9]+;
 WS: [ \t\f\r\n] -> skip;

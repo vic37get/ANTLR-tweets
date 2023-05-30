@@ -14,7 +14,7 @@ def home(request):
         uploaded_file = request.FILES['file']
         dados = uploaded_file.read().decode('utf-8')
 
-        dados = unidecode(dados)
+        #dados = unidecode(dados)
         dados = InputStream(dados)
         lexer = ttLexer(dados)
 
