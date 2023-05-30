@@ -1,11 +1,3 @@
-Vc sabia que “investindo” no indice ibovespa, vc esta comprando: Goll4, cogn3, petz3, viia3, ntco3, irbr3, hapv3, cash3…
++4% ontem. -2% Hoje como devo fechar a semana ?
 
-Usar ibov como benchmark é enganar o cliente. A proxima vez que for investir em algum fundo ativo voce tem que usar idiv como parametro nao ibov.
-
-IDIV esta composto por 46 acoes pagadoras de dividendos que sao reinvestidos no proprio indice.
-
-Ibovespa hoje tem 87 acoes com uma grande parte horrivel. Engraçado que mesmo com tantos lixos no indice gestores de fundos nao conseguem ganhar do ibovespa.
-
-Nao seja enganado pela industria de fundos, que ainda te cobram comissao (2% a maioria) sobre o dinheiro investido independente do resultado. E obviamente ainda tem tava de performance se bater o ibovespa.
-
-Pior que industria de fundos, somente o de casa de analise. Eles tem menos diplomas, menos experiencia no mercado, só ficam dando call de compra e nao tem que performar.
+#Daytrade #IBOV #indio

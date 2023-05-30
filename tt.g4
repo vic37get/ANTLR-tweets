@@ -1,9 +1,9 @@
 grammar tt;
 
-prog: (tempo | tipo_investimento | ativo | monetario | palavra | HASHTAGS| numeros | char | MENCOES | datas | indices | tendencia | bolsa | operacao)+;
+prog: (tempo | tipo_investimento | ativo | monetario | palavra | HASHTAGS| numeros | char | MENCOES | datas | indices | tendencia | bolsa | operacao | renda)+;
 
 datas: (DATA_COM_BARRA | DIA_SEMANA);
-    DATA_COM_BARRA: (DIGITO DIGITO'/'DIGITO DIGITO'/'DIGITO DIGITO DIGITO DIGITO);
+    DATA_COM_BARRA: (DIGITO DIGITO'/'DIGITO DIGITO'/'DIGITO DIGITO DIGITO DIGITO | (DIGITO DIGITO'/'DIGITO DIGITO));
     DIA_SEMANA: [Ss]'egunda'[-]?'feira'|
                 [Tt]'erça'[-]?'feira'|
                 [Qq]'uarta'[-]?'feira'|
@@ -56,31 +56,31 @@ ativo: (ACAO | FII);
     FII: LETRA LETRA LETRA LETRA'11';
     ACAO: LETRA LETRA LETRA LETRA[3-9];
 
-monetario: (VALOR_MONETARIO);
+monetario: (VALOR_MONETARIO | MOEDA);
     VALOR_MONETARIO: (SIMBOLO_MOEDA WS* VALOR ((WS* SIMBOLO_QUANTIDADE)|(WS* 'de'WS*MOEDA))*|VALOR ((WS* SIMBOLO_QUANTIDADE)|(WS* 'de'WS*MOEDA))+);
     SIMBOLO_MOEDA: [Rr]?'$'|[Uu][Ss]'$';
     VALOR: ([1-9]DIGITO*(('.'DIGITO DIGITO DIGITO)|','DIGITO+)*);
     DIGITO: [0-9];
     MOEDA: ('real'|'reais'|'d'[oó]'lar''es'?|'dol');
 
-numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO);
-FRACAO: DIGITO+'.'|','DIGITO+;
-PORCENTAGEM: [-+]?FRACAO'%'|[-+]?DIGITO+'%';
-quantidade: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
-NUMERO: DIGITO+;
-SIMBOLO_QUANTIDADE: '[bm]ilhao'|'[bm]ilh'[oõ]'es'|'mil'|'k'|'m'|'bi ';
-//DIGITO: [0-9];
+renda: (DIVIDENDO | JCP);
+DIVIDENDO: ([Dd]'ividendo'[s]?);
+JCP: ('JCP' | [Jj]'uro'[s]? WS [Ss]'obre' WS [Cc]'apital' WS [Pp]'r'[oó]'prio');
 
-char: (PONTUACAO | parenteses | OUTROS_CHARS | ASPAS | EMOJI);
+numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO | ORDINAL);
+    FRACAO: DIGITO+'.'|','DIGITO+;
+    PORCENTAGEM: [-+]?FRACAO'%'|[-+]?DIGITO+'%';
+    ORDINAL: DIGITO+[ºª];
+
+quantidade: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
+    NUMERO: DIGITO+;
+    SIMBOLO_QUANTIDADE: '[bm]ilhao'|'[bm]ilh'[oõ]'es'|'mil'|'k'|'m'|'bi ';
+
+char: (PONTUACAO | OUTROS_CHARS| EMOJI);
     PONTUACAO: [.:;?!,] | RET;
     RET: '...';
-    OUTROS_CHARS: [/{}=\-|];
-    ASPAS: ['"];
+    OUTROS_CHARS: [/{}=\-|'"()];
     EMOJI: [\p{Emoji}\uFE0F]+; // \uFE0F (Variation Selector-16) character is often used in combination with other emoji characters to indicate a specific visual presentation style
-
-parenteses: (ABRE_PARENTESES | FECHA_PARENTESES);
-    ABRE_PARENTESES: '(';
-    FECHA_PARENTESES: ')';
 
 palavra: (PALAVRA);
     PALAVRA: LETRA+;
