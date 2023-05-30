@@ -35,20 +35,22 @@ horas: (HORA_FORMATADA | HORA_EXTENSO);
 
 tipo_investimento: (RENDA_FIXA | RENDA_VARIAVEL);
     RENDA_FIXA: [Pp]'oupan'[cç]'a' | [Tt]'esouro' WS [Dd]'ireto' | ([Tt]'esouro' WS)? ('SELIC' | [Ss]'elic') | ([Tt]'esouro' WS)? ('IPCA' | [Ii]'pca') | 'CDB' | 'LCI' | 'LCA' | 'CRI' | 'CRA' | 'LC' | [Dd]'eb'[eê]'ntures' | 'LF';
-    RENDA_VARIAVEL: [Aa][cç]([oõ]'es' | [aã]'o') | 'BDR''s'? | [Ff]'undo''s'? WS 'de' WS 'investimento''s'? | [Ff]'undo''s'? WS 'imobili'[aá]'rio''s'? | 'FII''s'? | 'ETF''s'? | [Cc]'ripto''s'? | [Bb]'itcoin';
+    RENDA_VARIAVEL: [Aa][cç]([oõ]'es' | [aã]'o') | 'BDR''s'? | [Ff]'undo''s'? WS 'de' WS 'investimento''s'? | [Ff]'undo''s'? WS 'imobili'[aá]'rio''s'? | ('FII' | 'fii' )'s'? | 'ETF''s'? | [Ff]'iagro' | [Cc]'ripto''s'? | [Bb]'itcoin';
 
 ativo: (ACAO | FII_ETF);
     FII_ETF: LETRA LETRA LETRA LETRA'11';
     ACAO: LETRA LETRA LETRA LETRA[3-9];
 
 monetario: (valor_monetario | MOEDA);
-    valor_monetario: (CIFRAO FRACAO) | (CIFRAO NUMERO) ;
-    VALOR: (([0-9]{1,3}[,][0-9]{2})|((([0-9]){1,3}[.])+));
-    CIFRAO: [Rr]'$'|'$';
-    MOEDA: 'd'[oó]'lar'|'dol';
+    //valor_monetario: (SIMBOLO_MOEDA FRACAO SIMBOLO_QUANTIDADE?) | (SIMBOLO_MOEDA NUMERO SIMBOLO_QUANTIDADE?) ;
+    valor_monetario: (SIMBOLO_MOEDA VALOR SIMBOLO_QUANTIDADE?) | (VALOR SIMBOLO_QUANTIDADE MOEDA) ;
+    //VALOR: (([0-9]{1,3}[,][0-9]{2})|((([0-9]){1,3}[.])+));
+    VALOR: (([1-9]DIGITO{0,2}('.'DIGITO{3})*)|(([1-9]'.'DIGITO*)?DIGITO))(','NUMERO)? | NUMERO;
+    SIMBOLO_MOEDA: [Rr]'$'|'$';
+    MOEDA: 'real' | 'reais' | 'd'[oó]'lar''es'?|'dol';
 
-numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO);
-    FRACAO: DIGITO+[/,.]DIGITO+;
+    numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO);
+    FRACAO: DIGITO+[/,]DIGITO+;
     PORCENTAGEM: [-+]?FRACAO'%'|[-+]?DIGITO+'%';
     quantidade: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
     NUMERO: DIGITO+;
