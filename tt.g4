@@ -1,6 +1,6 @@
 grammar tt;
 
-prog: (tempo | tipo_investimento | ativo | monetario | palavra | HASHTAGS| numeros | char | MENCOES | datas | indices | tendencia)+;
+prog: (tempo | tipo_investimento | ativo | monetario | palavra | HASHTAGS| numeros | char | MENCOES | datas | indices | tendencia | bolsa | operacao)+;
 
 datas: (DATA_COM_BARRA | DIA_SEMANA);
     DATA_COM_BARRA: (DIGITO DIGITO'/'DIGITO DIGITO'/'DIGITO DIGITO DIGITO DIGITO);
@@ -39,12 +39,18 @@ tipo_investimento: (RENDA_FIXA | RENDA_VARIAVEL);
     | 'Fi-infra' | 'fip-ie';
 
 indices: (INDICES);
-INDICES: [Ii]('bov'|'BOV')('espa'|'ESPA')? | [Ii]('fix'|'FIX') | [Ss]'mall11' | ('ivvb11'|'IVVB11');
+    INDICES: [Ii]('bov'|'BOV')('espa'|'ESPA')? | [Ii]('fix'|'FIX') | [Ss]'mall11' | ('ivvb11'|'IVVB11');
+
+bolsa: (BOLSA);
+    BOLSA: ([Bb]'3' | 'NASDAQ' | 'nasdaq' | 'NYSE' | 'nyse');
+
+operacao: (OPERACAO);
+    OPERACAO: ([Cc]'all' | 'CALL' | [Pp]'ut' | 'PUT');
 
 tendencia: (TENDENCIA);
-TENDENCIA: (ALTO|BAIXO);
-ALTO: ('alta'|'crescimento'|'subi'([ru]|'da')|'sobe');
-BAIXO: ('baixa'|'queda'|'desc'('e'[ru]|'ida')|'cai'[u]?);
+    TENDENCIA: (ALTO|BAIXO);
+    ALTO: ('alta'|'crescimento'|'subi'([ru]|'da')|'sobe');
+    BAIXO: ('baixa'|'queda'|'desc'('e'[ru]|'ida')|'cai'[u]?);
 
 ativo: (ACAO | FII);
     FII: LETRA LETRA LETRA LETRA'11';
@@ -62,7 +68,7 @@ FRACAO: DIGITO+'.'|','DIGITO+;
 PORCENTAGEM: [-+]?FRACAO'%'|[-+]?DIGITO+'%';
 quantidade: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
 NUMERO: DIGITO+;
-SIMBOLO_QUANTIDADE: '[bm]ilhao'|'[bm]ilhoes'|'mil'|'k'|'m'|'bi ';
+SIMBOLO_QUANTIDADE: '[bm]ilhao'|'[bm]ilh'[oõ]'es'|'mil'|'k'|'m'|'bi ';
 //DIGITO: [0-9];
 
 char: (PONTUACAO | parenteses | OUTROS_CHARS | ASPAS | EMOJI);
