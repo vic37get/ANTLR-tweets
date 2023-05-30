@@ -4,9 +4,16 @@ from django.template import loader
 from django.shortcuts import render, redirect
 from antlr4 import *
 from gen.ttLexer import ttLexer
+from gen.ttParser import  ttParser
 from unidecode import unidecode
 import json
 
+class MyVisitor(ParseTreeVisitor):
+    def visitMonetario(self, ctx):
+        token = ctx.start
+        match = token.text
+        print(match)
+        return None
 
 def home(request):
     dados = ''
@@ -19,7 +26,6 @@ def home(request):
         lexer = ttLexer(dados)
 
         dict_tokens = {}
-
         for token in lexer.getAllTokens():
             if lexer.symbolicNames[token.type] in dict_tokens:
                 dict_tokens[lexer.symbolicNames[token.type]].append(token.text)

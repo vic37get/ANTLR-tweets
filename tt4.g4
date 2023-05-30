@@ -1,6 +1,6 @@
 grammar tt;
 
-prog: (tempo | tipo_investimento | ativo | monetario | palavra | HASHTAGS| numeros | char | MENCOES | datas | indices | tendencia)+;
+prog: (tempo | tipo_investimento | ativo | monetario | palavra | HASHTAGS| numeros | char | MENCOES | datas)+;
 
 datas: (DATA_COM_BARRA | DIA_SEMANA);
     DATA_COM_BARRA: (DIGITO DIGITO'/'DIGITO DIGITO'/'DIGITO DIGITO DIGITO DIGITO);
@@ -14,8 +14,8 @@ datas: (DATA_COM_BARRA | DIA_SEMANA);
 
 tempo: (TURNO | horas | DIA_TEMPO | MEDIDA_TEMPO | MES);
     TURNO: 'manhã' | 'tarde' | 'noite' | 'madrugada';
-    DIA_TEMPO: 'ontem' | 'hoje' | 'amanh'[aã] | 'anteontem' | 'dia';
-    MEDIDA_TEMPO: 'min' | 'hora'[s]? | 'h' | 'ano'[s]? | 'mês'| 'meses' | 'semana'[sl]? | ('bi'|'se'|'tri')'mestr'('al'|'e') | 'anual';
+    DIA_TEMPO: 'ontem' | 'hoje' | 'amanh'[aã] | 'anteontem';
+    MEDIDA_TEMPO: 'min' | 'hora' | 'h' | 'ano'[s]? | 'mês'| 'meses';
     MES: [Jj]'an''eiro'? | 'JANEIRO' |
          [Ff]'ev''ereiro'? | 'FEVEIRO' |
          [Mm]'arço' | 'MARÇO' |
@@ -38,32 +38,30 @@ tipo_investimento: (RENDA_FIXA | RENDA_VARIAVEL);
     RENDA_VARIAVEL: [Aa][cç]([oõ]'es' | [aã]'o') | 'BDR''s'? | [Ff]'undo''s'? WS 'de' WS 'investimento''s'? | [Ff]'undo''s'? WS 'imobili'[aá]'rio''s'? | ('FII' | 'fii' )'s'? | 'ETF''s'? | [Ff]'iagro' | [Cc]'ripto''s'? | [Bb]'itcoin'
     | 'Fi-infra' | 'fip-ie';
 
-indices: (INDICES);
-INDICES: [Ii]('bov'|'BOV')('espa'|'ESPA')? | [Ii]('fix'|'FIX') | [Ss]'mall11' | ('ivvb11'|'IVVB11');
-
-tendencia: (TENDENCIA);
-TENDENCIA: (ALTO|BAIXO);
-ALTO: ('alta'|'crescimento'|'subi'([ru]|'da')|'sobe');
-BAIXO: ('baixa'|'queda'|'desc'('e'[ru]|'ida')|'cai'[u]?);
-
 ativo: (ACAO | FII);
     FII: LETRA LETRA LETRA LETRA'11';
     ACAO: LETRA LETRA LETRA LETRA[3-9];
 
-monetario: (VALOR_MONETARIO);
-    VALOR_MONETARIO: (SIMBOLO_MOEDA WS* VALOR ((WS* SIMBOLO_QUANTIDADE)|(WS* 'de'WS*MOEDA))*|VALOR ((WS* SIMBOLO_QUANTIDADE)|(WS* 'de'WS*MOEDA))+);
-    SIMBOLO_MOEDA: [Rr]?'$'|[Uu][Ss]'$';
-    VALOR: ([1-9]DIGITO*(('.'DIGITO DIGITO DIGITO)|','DIGITO+)*);
-    DIGITO: [0-9];
-    MOEDA: ('real'|'reais'|'d'[oó]'lar''es'?|'dol');
+//monetario: (VALOR_MONETARIO | MOEDA);
+    //valor_monetario: (SIMBOLO_MOEDA FRACAO SIMBOLO_QUANTIDADE?) | (SIMBOLO_MOEDA NUMERO SIMBOLO_QUANTIDADE?) ;
+    VALOR_MONETARIO: (SIMBOLO_MOEDA VALOR SIMBOLO_QUANTIDADE) | (VALOR SIMBOLO_QUANTIDADE MOEDA) ;
+    //VALOR: (([0-9]{1,3}[,][0-9]{2})|((([0-9]){1,3}[.])+));
+    //VALOR: (([1-9]DIGITO{0,2}('.'DIGITO{3})*)|(([1-9]'.'DIGITO*)?DIGITO))(','NUMERO)? | NUMERO;
+    //SIMBOLO_MOEDA: [Rr]'$'|'$';
+    MOEDA: 'real' | 'reais' | 'd'[oó]'lar''es'?|'dol';
 
-numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO);
-FRACAO: DIGITO+'.'|','DIGITO+;
-PORCENTAGEM: [-+]?FRACAO'%'|[-+]?DIGITO+'%';
-quantidade: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
-NUMERO: DIGITO+;
-SIMBOLO_QUANTIDADE: '[bm]ilhao'|'[bm]ilhoes'|'mil'|'k'|'m'|'bi ';
-//DIGITO: [0-9];
+    numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO);
+    FRACAO: DIGITO+'.'|','DIGITO+;
+    PORCENTAGEM: [-+]?FRACAO'%'|[-+]?DIGITO+'%';
+    quantidade: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
+    NUMERO: DIGITO+;
+    SIMBOLO_QUANTIDADE: '[bm]ilhao'|'[bm]ilhoes'|'mil'|'k'|'m'|'bi';
+    //DIGITO: [0-9];
+
+monetario: (SIMBOLO_MOEDA VALOR);
+SIMBOLO_MOEDA: [Rr]?'$';
+VALOR: ([1-9]DIGITO*(('.'DIGITO DIGITO DIGITO)|','DIGITO+)*);
+DIGITO: [0-9];
 
 char: (PONTUACAO | parenteses | OUTROS_CHARS | ASPAS | EMOJI);
     PONTUACAO: [.:;?!,] | RET;
