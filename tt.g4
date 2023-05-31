@@ -55,26 +55,27 @@ tendencia: (TENDENCIA);
 ativo: (ACAO | FII);
     FII: LETRA LETRA LETRA LETRA'11';
     ACAO: LETRA LETRA LETRA LETRA[3-9];
+quantidade: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
+    NUMERO: DIGITO+;
+    SIMBOLO_QUANTIDADE: '[bm]ilhao'|'[bm]ilh'[oõ]'es'|'mil'|'k'|'m'|'bi ';
+
+numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO | ORDINAL);
+    FRACAO: DIGITO+'.'|','DIGITO+;
+    PORCENTAGEM: ([-+]?FRACAO|[-+]?DIGITO+)'.,'?(([-+]?FRACAO|[-+]?DIGITO+))*'%';
+    ORDINAL: DIGITO+[ºª];
 
 monetario: (VALOR_MONETARIO | MOEDA);
     VALOR_MONETARIO: (SIMBOLO_MOEDA WS* VALOR ((WS* SIMBOLO_QUANTIDADE)|(WS* 'de'WS*MOEDA))*|VALOR ((WS* SIMBOLO_QUANTIDADE)|(WS* 'de'WS*MOEDA))+);
     SIMBOLO_MOEDA: [Rr]?'$'|[Uu][Ss]'$';
-    VALOR: ([1-9]DIGITO*(('.'DIGITO DIGITO DIGITO)|','DIGITO+)*);
     DIGITO: [0-9];
+    VALOR: ([1-9]DIGITO*(('.'DIGITO DIGITO DIGITO)|','DIGITO+)*);
     MOEDA: ('real'|'reais'|'d'[oó]'lar''es'?|'dol');
 
 renda: (DIVIDENDO | JCP);
 DIVIDENDO: ([Dd]'ividendo'[s]?);
 JCP: ('JCP' | [Jj]'uro'[s]? WS [Ss]'obre' WS [Cc]'apital' WS [Pp]'r'[oó]'prio');
 
-numeros: (PORCENTAGEM | FRACAO | quantidade | NUMERO | ORDINAL);
-    FRACAO: DIGITO+'.'|','DIGITO+;
-    PORCENTAGEM: [-+]?FRACAO'%'|[-+]?DIGITO+'%';
-    ORDINAL: DIGITO+[ºª];
 
-quantidade: (NUMERO SIMBOLO_QUANTIDADE) | (FRACAO SIMBOLO_QUANTIDADE);
-    NUMERO: DIGITO+;
-    SIMBOLO_QUANTIDADE: '[bm]ilhao'|'[bm]ilh'[oõ]'es'|'mil'|'k'|'m'|'bi ';
 
 char: (PONTUACAO | OUTROS_CHARS| EMOJI);
     PONTUACAO: [.:;?!,] | RET;
